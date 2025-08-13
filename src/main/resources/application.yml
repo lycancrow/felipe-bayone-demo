@@ -1,0 +1,22 @@
+server:
+  # usa la variable PORT si existe (Azure la suele inyectar). Si no, usa 9191 por defecto.
+  port: ${PORT:9191}
+
+spring:
+  datasource:
+    # mejor dejar la URL por defecto en una variable de entorno. Si no existe, usa la URL base (ajústala).
+    url: ${DB_URL:jdbc:sqlserver://bayone-server-database.database.windows.net:1433;databaseName=BayOneDatabase;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;}
+    username: ${DB_USER:bayoneadmin@bayone-server-database}
+    password: ${DB_PASS:REPLACE_ME}
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+# logs (opcional, útil para diagnosticar en Azure)
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
